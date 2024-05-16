@@ -20,7 +20,7 @@ setup(
 name="Xray",
 version="0.0.1",
 author="avinash",
-install_requires=get_requirements(r"C:\Users\avinash.polisetty\projects\DLproject\requirements_dev.txt"),
+install_requires=get_requirements(r"E:\DLproject\requirements_dev.txt"),
 package=find_packages()
 
 )
