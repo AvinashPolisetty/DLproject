@@ -19,7 +19,7 @@ CLASS_LABEL_1: str = "NORMAL"
 
 CLASS_LABEL_2: str = "PNEUMONIA"
 
-BRIGHTNESS: int = 0.10
+BRIGHTNESS: int = [0.10]
 
 CONTRAST: int = 0.1
 
