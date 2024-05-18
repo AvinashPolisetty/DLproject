@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import List
+from typing import List,Tuple
 
 import torch
 
@@ -19,13 +19,13 @@ CLASS_LABEL_1: str = "NORMAL"
 
 CLASS_LABEL_2: str = "PNEUMONIA"
 
-BRIGHTNESS: int = [0.10]
+brightness: Tuple[float, float] = (0.875, 1.125)
 
-CONTRAST: int = 0.1
+contrast: Tuple[float, float] = (0.5, 1.5)
 
-SATURATION: int = 0.10
+saturation: Tuple[float, float] = (0.5, 1.5)
 
-HUE: int = 0.1
+hue: Tuple[float, float] = (-0.05, 0.05)
 
 RESIZE: int = 224
 

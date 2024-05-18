@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from torch import device
 
 from xray.constant.training_pipeline import *
-
+from typing import Tuple
 
 @dataclass
 class DataIngestionConfig:
@@ -29,11 +29,11 @@ class DataTransformationConfig:
     def __init__(self):
 
         self.color_jitter_transform: dict= {
-            "brightness": BRIGHTNESS,
-            "contrast": CONTRAST,
-            "hue": HUE,
-            "saturation": SATURATION     
-        }
+            "brightness": brightness,
+            "contrast": contrast,
+            "saturation": saturation,
+            "hue": hue,
+        } 
 
         self.resize:int = RESIZE
         self.CENTERCROP: int = CENTERCROP
@@ -65,3 +65,22 @@ class DataTransformationConfig:
 
 
 
+@dataclass
+class ModelTrainerConfig:
+    def __init__(self):
+
+        self.artifact_dir: str = os.path.join(ARTIFACT_DIR,TIMESTAMP,"model_trainer")
+
+        self.trained_model_path= os.path.join(self.artifact_dir,TRAINED_MODEL_NAME)
+
+        self.train_transform_key: str = TRAIN_TRANSFORMS_KEY
+
+        self.epochs:int = EPOCH
+
+        self.optimizer_params: dict = {"lr": 0.01, "momentum": 0.8}
+
+        self.scheduler_params: dict = {"step_size": STEP_SIZE, "gamma": GAMMA}
+
+        self.device: device = DEVICE
+
+        self.trained_bentoml_model_name: str = "xray_model"

@@ -1,9 +1,6 @@
 import sys
 from xray.logger import logging
 from xray.exception import XRayException
-from xray.components.data_ingestion import DataIngestion
-from xray.entity.artifact_entity import DataIngestionArtifact
-from xray.entity.config_entity import DataIngestionConfig
 from xray.pipeline.training_pipeline import TrainPipeline
 
 

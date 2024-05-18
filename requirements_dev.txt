@@ -1,7 +1,7 @@
 bentoml==1.0.25
 joblib==1.2.0
 pip-chill==1.0.1
-torchvision
+torchvision==0.17.1
 tqdm==4.64.1
 wincertstore==0.2
 dvc
@@ -16,4 +16,4 @@ black==22.8.0
 flake8==5.0.4
 mypy==0.971
 
--e .
+#-e .

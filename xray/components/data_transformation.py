@@ -14,8 +14,8 @@ import joblib
 class DataTransformation:
 
     def __init__(self,
-                data_transformation_config:DataTransformationConfig,
-                data_ingestion_artifact:DataIngestionArtifact):
+                data_transformation_config: DataTransformationConfig,
+                data_ingestion_artifact: DataIngestionArtifact):
         
         self.data_transform=data_transformation_config
         self.data_ingestion_artifacts=data_ingestion_artifact
@@ -30,14 +30,14 @@ class DataTransformation:
                 [
                     transforms.Resize(self.data_transform.resize),
                     transforms.CenterCrop(self.data_transform.CENTERCROP),
-                    transforms.ColorJitter(self.data_transform.color_jitter_transform),
+                    #transforms.ColorJitter(self.data_transform.color_jitter_transform),
                     transforms.RandomHorizontalFlip(),
                     transforms.RandomRotation(
-                        self.data_transformation_config.RANDOMROTATION
+                        self.data_transform.RANDOMROTATION
                     ),
                     transforms.ToTensor(),
                     transforms.Normalize(
-                        **self.data_transformation_config.normalize_transforms
+                        **self.data_transform.normalize_transforms
                     ),
                 ]
             )
@@ -62,7 +62,7 @@ class DataTransformation:
             test_transform: transforms.Compose = transforms.Compose(
                 [
                     transforms.Resize(self.data_transform.resize),
-                    transforms.CenterCrop(self.data_transfor.CENTERCROP),
+                    transforms.CenterCrop(self.data_transform.CENTERCROP),
                     transforms.ToTensor(),
                     transforms.Normalize(
                         **self.data_transform.normalize_transforms
@@ -86,12 +86,12 @@ class DataTransformation:
             logging.info("Entered the data_loader method of Data transformation class")
 
             train_data:Dataset=ImageFolder(
-                os.path.join(self.data_ingestion_artifacts.train_file_path,
+                os.path.join(self.data_ingestion_artifacts.train_file_path),
                 transform=train_transform)
-            )
+            
 
             test_data: Dataset = ImageFolder(
-                os.path.join(self.data_ingestion_artifact.test_file_path),
+                os.path.join(self.data_ingestion_artifacts.test_file_path),
                 transform=test_transform,
             )
 
