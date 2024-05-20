@@ -5,10 +5,12 @@ from xray.components.data_ingestion import DataIngestion
 from xray.components.data_transformation import DataTransformation
 from xray.components.model_training import ModelTrainer
 from xray.components.model_evaluation import ModelEvaluation
+from xray.components.model_pusher import ModelPusher
 from xray.entity.artifact_entity import (DataIngestionArtifact,DataTransformationArtifact,
-                                         ModelTrainerArtifact,ModelEvaluationArtifact)
+                                         ModelTrainerArtifact,ModelEvaluationArtifact,
+                                         ModelPusherArtifact)
 from xray.entity.config_entity import (DataIngestionConfig,DataTransformationConfig,
-                                       ModelTrainerConfig,ModelEvaluationConfig)
+                                       ModelTrainerConfig,ModelEvaluationConfig,ModelPusherConfig)
 
 
 class TrainPipeline:
@@ -18,6 +20,7 @@ class TrainPipeline:
         self.data_transformation=DataTransformationConfig()
         self.model_training=ModelTrainerConfig()
         self.model_evaluation=ModelEvaluationConfig()
+        self.model_pusher_config=ModelPusherConfig()
 
     
     def start_data_ingestion(self):
@@ -99,7 +102,18 @@ class TrainPipeline:
             raise XRayException(e, sys)
 
        
-    
+    def start_model_pusher(self)->ModelPusherArtifact:
+
+        try:
+            logging.info("Entered the start_model_pusher method of TrainPipeline class")
+
+            model_pusher = ModelPusher(model_pusher_config=self.model_pusher_config)
+            model_pusher_artifact=model_pusher.initiate_model_pusher()
+
+            return model_pusher_artifact
+
+        except Exception as e:
+            raise  XRayException(e,sys)
 
     def run_pipeline(self) -> None:
         logging.info("Entered the run_pipeline method of TrainPipeline class")
@@ -121,6 +135,11 @@ class TrainPipeline:
                 model_train_artifact=model_trainer_artifact,
                 data_transform_artifact=data_transformation_artifact
             )
+
+            model_pusher_artifact:ModelPusherArtifact = self.start_model_pusher()
+
+            logging.info("Exited the run_pipeline method of TrainPipeline class")
+
 
             
         except Exception as e:
