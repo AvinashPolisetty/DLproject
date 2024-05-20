@@ -1,5 +1,4 @@
 import sys
-import os
 from xray.logger import logging
 from xray.exception import XRayException
 from xray.components.data_ingestion import DataIngestion
