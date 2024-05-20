@@ -37,10 +37,10 @@ def save_image(uploaded_file):
 
         if (prediction == 0):
             print ('Normal')
-            st.text_area(label="Prediction:", value="Normal", height=50)
+            st.text_area(label="Prediction:", value="Normal", height=60)
         if (prediction == 1):
             print ('PNEUMONIA')
-            st.text_area(label="Prediction:", value="PNEUMONIA", height=50)
+            st.text_area(label="Prediction:", value="PNEUMONIA", height=60)
 
 
 
